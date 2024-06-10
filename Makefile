@@ -2,7 +2,7 @@ build-test:
 	gcc -o test test.c
 
 build:
-	go generate && go build -o uprobe
+	go mod tidy && go generate && go build -o uprobe
 
 run:
 	./uprobe
