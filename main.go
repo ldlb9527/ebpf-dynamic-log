@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-//go:generate go run github.com/cilium/ebpf/cmd/bpf2go -target amd64 -type data_t bpf uprobe_kernel.c -- -I../headers
+//go:generate go run github.com/cilium/ebpf/cmd/bpf2go -target amd64 -type data_t bpf uprobe_kernel.c -- -I./headers
 
 func main() {
 
@@ -40,7 +40,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("opening executable: %s", err)
 	}
-	uprobe, err := ex.Uprobe("AddNum",objs.UprobeEntry, nil)
+	uprobe, err := ex.Uprobe("AddNum", objs.UprobeEntry, nil)
 	if err != nil {
 		log.Fatalf("creating uprobe: %s", err)
 	}
@@ -105,7 +105,7 @@ func main() {
 		if event.Entry {
 			comment += fmt.Sprintf(" arg1:%v ", event.Args[0])
 			comment += fmt.Sprintf(" arg2:%v ", event.Args[1])
-		}else {
+		} else {
 			comment += fmt.Sprintf(" return:%v ", event.Ret)
 		}
 		fmt.Println(comment)
